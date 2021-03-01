@@ -56,12 +56,12 @@ class ActivationsSource(Source):
 
     def _remove_over_long_activations(self, appliance_to_filter):
         new_activations = {}
-        for fold, appliances in self.activations.iteritems():
+        for fold, appliances in self.activations.items():
             new_activations[fold] = {}
-            for appliance, buildings in appliances.iteritems():
+            for appliance, buildings in appliances.items():
                 new_activations[fold][appliance] = {}
                 if appliance == appliance_to_filter:
-                    for building, activations in buildings.iteritems():
+                    for building, activations in buildings.items():
                         new_activations[fold][appliance][building] = [
                             activation for activation in activations
                             if len(activation) < self.seq_length]
