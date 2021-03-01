@@ -65,7 +65,7 @@ class Source(object):
             all_appliances = {}
             for i in range(num_seq_per_batch):
                 try:
-                    seq = seq_iterator.next()
+                    seq = seq_iterator.__next__()
                 except StopIteration:
                     stop = True
                     seq = Sequence((self.seq_length, 1))
