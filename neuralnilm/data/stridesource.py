@@ -57,8 +57,8 @@ class StrideSource(Source):
         # Load dataset
         dataset = nilmtk.DataSet(self.filename)
 
-        for fold, buildings_and_windows in self.windows.iteritems():
-            for building_i, window in buildings_and_windows.iteritems():
+        for fold, buildings_and_windows in self.windows.items():
+            for building_i, window in buildings_and_windows.items():
                 dataset.set_window(*window)
                 elec = dataset.buildings[building_i].elec
                 building_name = (
@@ -103,8 +103,8 @@ class StrideSource(Source):
     def _compute_num_sequences_per_building(self):
         index = []
         all_num_seqs = []
-        for fold, buildings in self.data.iteritems():
-            for building_name, df in buildings.iteritems():
+        for fold, buildings in self.data.items():
+            for building_name, df in buildings.items():
                 remainder = len(df) - self.seq_length
                 num_seqs = np.ceil(remainder / self.stride) + 1
                 num_seqs = max(0 if df.empty else 1, int(num_seqs))
