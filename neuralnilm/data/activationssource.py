@@ -37,9 +37,9 @@ class ActivationsSource(Source):
 
     def get_num_activations(self):
         num_activations = {}
-        for fold, appliances in self.activations.iteritems():
-            for appliance, buildings in appliances.iteritems():
-                for building_name, activations in buildings.iteritems():
+        for fold, appliances in self.activations.items():
+            for appliance, buildings in appliances.items():
+                for building_name, activations in buildings.items():
                     num_activations.setdefault(fold, {}).setdefault(
                         appliance, {})[building_name] = len(activations)
         return num_activations
