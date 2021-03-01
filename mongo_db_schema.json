@@ -1,0 +1,109 @@
+experiments
+{
+    '_id': 'e123_fridge',
+    'data': {
+	'description': 'Using loads of data!',
+	'pipeline': {
+	    'sources': {
+		'0': {
+		    'name': 'SyntheticAggregateSource',
+		    'num_activations': {
+			'train': {
+			    'fridge': {
+				'UK-DALE_building_1': 100
+			    }
+			}
+		    }
+		}
+	    },
+	    'input_processing': []
+	},
+	'activations': {}
+    },
+    'trainer': {
+	'loss_function': 'mean_squared_error',
+	'update_function': 'NAG',
+	'requested_learning_rates': {
+	    '0': 0.001
+	},
+	'actual_learning_rates': {
+	    '0': 0.001
+	},
+	'requested_train_iterations': 500
+    },
+    'software_versions': {
+	'theano': '0.7.0',
+	'python': '2.7.10',
+	'lasagne': '0.1.0',
+	'neuralnilm': '2015-01-01'
+    },
+    'net': {
+        'description': 'Attempt to do blah.',
+        'tags': ['AE', 'RNN', '1DConv', 'tied weights'],
+	'predecessor_experiment': 'e120',
+        'architecture': {
+            '0': {
+	       'layers': [
+                  {'type': 'Input', 'output_shape': (1, 2, 4), 'num_units': 100},
+                  {'type': 'Dense', 'output_shape': (1, 2, 4), 'num_units':  50},
+                  {'type': 'Concat', 'input_layers': [0, 1],
+                   'concat_axis': 0, 'output_shape': (2, 2, 4)}
+               ], 
+               'num_trainable_parameters': 10000
+            }
+	}
+    }
+}
+
+experiments.net doesn't need 'train_iterations' because we can get that from 'train_scores'.
+
+
+train_scores
+{
+    'experiment_id': 0,
+    'iteration': 1000,
+    'loss': 0.1E-3,
+    'source_id': 0
+}
+
+
+validation_scores
+{
+    'experiment_id': 0,
+    'iteration': 0,
+    'source_id': 0,
+    'fold': 'train', # or unseen_appliances or unseen_activations_of_seen_appliances
+    'scores': {
+	'regression': {
+	    'mse': 0.1E-2,
+	    'energy_correctly_assigned': 0.1E-4
+	},
+	'classification_2_state': {
+	    'f1_score': 0.1E-3
+	},
+	'classification_3_state': {
+	    'f1_score': 0.1E-2
+	}
+    }
+}
+
+
+disaggregation_scores
+{
+    'experiment_id': 0,
+    'iteration': 0,
+    'source_id': 0,
+    'fold': 'train', # or unseen_appliances or unseen_activations_of_seen_appliances
+    'scores': {
+	'regression': {
+	    'mse': 0.1E-2,
+	    'energy_correctly_assigned': 0.1E-4
+	},
+	'classification_2_state': {
+	    'f1_score': 0.1E-3
+	},
+	'classification_3_state': {
+	    'f1_score': 0.1E-2
+	}
+    }
+}
