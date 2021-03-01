@@ -98,7 +98,11 @@ class ActivationsSource(Source):
 
         num_buildings = len(activations_per_building)
         building_i = self.rng.choice(num_buildings, p=p)
-        building_name = activations_per_building.keys()[building_i]
+        #building_name = activations_per_building.keys()[building_i]
+        
+        #Nuevas
+        activations_per_building = list(activations_per_building.keys()) #Los convierto en lista
+        building_name = activations_per_building[building_i] #Selecciono de la lista
         return building_name
 
     def _select_activation(self, activations):
