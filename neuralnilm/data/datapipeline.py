@@ -43,7 +43,7 @@ class DataPipeline(object):
                     enable_all_appliances=enable_all_appliances,
                     validation=validation))
         try:
-            batch = self._source_iterators[source_id].next()
+            batch = self._source_iterators[source_id].__next__()
         except StopIteration:
             self._source_iterators[source_id] = None
             return None
