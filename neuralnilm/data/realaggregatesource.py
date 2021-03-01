@@ -75,8 +75,8 @@ class RealAggregateSource(ActivationsSource):
 
         self.mains = {}
         self.mains_good_sections = {}
-        for fold, buildings_and_windows in self.windows.iteritems():
-            for building_i, window in buildings_and_windows.iteritems():
+        for fold, buildings_and_windows in self.windows.items():
+            for building_i, window in buildings_and_windows.items():
                 dataset.set_window(*window)
                 elec = dataset.buildings[building_i].elec
                 building_name = (
@@ -114,8 +114,8 @@ class RealAggregateSource(ActivationsSource):
         """
         self.sections_with_no_target = {}
         seq_length_secs = self.seq_length * self.sample_period
-        for fold, sects_per_building in self.mains_good_sections.iteritems():
-            for building, good_sections in sects_per_building.iteritems():
+        for fold, sects_per_building in self.mains_good_sections.items():
+            for building, good_sections in sects_per_building.items():
                 activations = (
                     self.activations[fold][self.target_appliance][building])
                 mains = self.mains[fold][building]
@@ -142,7 +142,7 @@ class RealAggregateSource(ActivationsSource):
         self.all_gaps = {}
         for fold in DATA_FOLD_NAMES:
             all_gaps_for_fold = []
-            for building, gaps in self.sections_with_no_target[fold].iteritems():
+            for building, gaps in self.sections_with_no_target[fold].items():
                 gaps_for_building = [
                     (building, gap, gap.timedelta.total_seconds())
                     for gap in gaps]
@@ -186,7 +186,7 @@ class RealAggregateSource(ActivationsSource):
 
     def _remove_activations_with_no_mains(self):
         # First remove any activations where there is no mains data at all
-        for fold, activations_for_appliance in self.activations.iteritems():
+        for fold, activations_for_appliance in self.activations.items():
             activations_for_buildings = activations_for_appliance[
                 self.target_appliance]
             buildings_to_remove = []
@@ -200,10 +200,10 @@ class RealAggregateSource(ActivationsSource):
 
         # Now check for places where mains has insufficient samples,
         # for example because the mains series has a break in it.
-        for fold, activations_for_appliance in self.activations.iteritems():
+        for fold, activations_for_appliance in self.activations.items():
             activations_for_buildings = activations_for_appliance[
                 self.target_appliance]
-            for building, activations in activations_for_buildings.iteritems():
+            for building, activations in activations_for_buildings.items():
                 mains = self.mains[fold][building]
                 activations_to_remove = []
                 for i, activation in enumerate(activations):
